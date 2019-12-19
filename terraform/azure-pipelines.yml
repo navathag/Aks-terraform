@@ -12,7 +12,7 @@ stages:
   - job: Validate
     continueOnError: false
     steps:
-    - publish: 1-terraform
+    - publish: terraform
       artifact: terraform_out
     - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
       displayName: 'Use Terraform v0.12.18'
@@ -22,7 +22,7 @@ stages:
       displayName: 'terraform init'
       inputs:
         command: init
-        workingDirectory: 1-terraform
+        workingDirectory: terraform
         backendType: azurerm
         backendServiceArm: 'Azure SPN'
         backendAzureRmResourceGroupName: 'AKSTerraform-RG'
@@ -33,7 +33,7 @@ stages:
       displayName: 'terraform validate'
       inputs:
         command: validate
-        workingDirectory: 1-terraform
+        workingDirectory: terraform
  
 
 - stage: Deploy
